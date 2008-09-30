@@ -1,0 +1,30 @@
+
+u#:=4/9pt#;
+define_pixels(u);
+
+Phi=(1+sqrt5)/2;
+w=13*u#;
+h=Phi*w*u#;
+
+beginchar("A",h,w,0); "Letter A";
+	y1=y2=0;
+	y3=y5;
+	y4=h;
+	Phi*(y3-y2)=(y4-y3);
+
+	x1=0;
+	x2=w;
+	x4=.5[x1,x2];
+
+	z3=whatever[z2,z4];
+	z5=whatever[z1,z4];
+	
+	penstroke z1..z4;
+	penstroke z2..z4;
+	penstroke z3..z5;
+	labels (range 1 thru 5);
+endchar;
+showit;
+shipit;
+end
+

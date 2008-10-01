@@ -23,8 +23,9 @@ beginchar("A",h,w,0); "Letter A";
 	penstroke z2..z4;
 	penstroke z3..z5;
 	labels (range 1 thru 5);
+%showit;
+%shipit;
 endchar;
-showit;
-shipit;
+
 end
 

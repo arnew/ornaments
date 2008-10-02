@@ -1,12 +1,29 @@
 
+mode_setup;
+
 u#:=4/9pt#;
 define_pixels(u);
 
 Phi=(1+sqrt5)/2;
-w=13*u#;
-h=Phi*w*u#;
+chw:=10u#;
+chh:=Phi*chw;
 
-beginchar("A",h,w,0); "Letter A";
+beginchar("X",2chw,chh,0); "union-jack-like";
+	a:=0.5*w; b:=h;
+	z1=(0,b);
+	z2=(a,b);
+	z3=(2a,b);
+	z4=(0,0);
+	z5=(a,0);
+	z6=(2a,0);
+	pickup pencircle scaled u;
+	draw z1..z6;
+	draw z2..z5;
+	draw z3..z4;
+	labels (range 1 thru 6);
+endchar;
+
+beginchar("A",chw,chh,0); "Letter A";
 	y1=y2=0;
 	y3=y5;
 	y4=h;
@@ -18,10 +35,11 @@ beginchar("A",h,w,0); "Letter A";
 
 	z3=whatever[z2,z4];
 	z5=whatever[z1,z4];
+	pickup pencircle scaled u;
 	
-	penstroke z1..z4;
-	penstroke z2..z4;
-	penstroke z3..z5;
+	draw z1..z4;
+	draw z2..z4;
+	draw z3..z5;
 	labels (range 1 thru 5);
 %showit;
 %shipit;

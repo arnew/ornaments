@@ -8,57 +8,18 @@ show u;
 
 picture hormaeander_rechts;
 
-beginchar(1,4u#,3u#,0); "hor maeander rechts";
-	y1=y2=y3=h;
-	y4=y5=2/3*h;
-	y6=y7=1/3*h;
-	y8=y9=y10=0;
-
-	x1=x8=0;
-	x4=x9=1/4*w;
-	x5=x6=2/4*w;
-	x2=x7=3/4*w;
-	x3=x10=w;
-	
-	pickup pensquare scaled (u/3);
-
-	labels (range 1 thru 10);
-	draw z8--z1--z2--z7--z6--z5--z4--z9--z10--z3;
-
-	hormaeander_rechts:=currentpicture;
-endchar;
-
-beginchar(2,4u#,3u#,0); "hor maeander links";
-	currentpicture:=currentpicture+hormaeander_rechts;
-	currentpicture:=currentpicture reflectedabout((0.5[0,w],0),(0.5[0,w],h));
-endchar;
-
-beginchar(3,4u#,3u#,0); "hor maeander rechts";
-show u;
-	z4 = z5+u*right;
-	z3 = z4+2*u*up;
-	z2 = z3+3*u*left;
-	z1 = z2+3*u*down;
-	z1 = origin;
-
-	path p;
-	p = z1--z2--z3--z4--z5;
-
-	pickup pensquare scaled (u/3);
-
-	draw p -- reverse (p rotatedabout ((w/2,h/2),180));
-	labels (range 1 thru 5);
-
-	%hormaeander_rechts:=currentpicture;
-endchar;
-
-def maeander(expr n,richtung,ll,ur) =
-	hu:=xpart(ur-ll)/(n+2);
-	vu:=ypart(ur-ll)/(n+1);
-
+def maeander(expr n,richtung,dreh,ll,ur) =
 	% normieren
 	pair rchtg;
 	rchtg:=dir(angle(richtung));
+
+	if xpart(rchtg) = 0:
+		hu:=abs(xpart(ur-ll)/(n+2));
+		vu:=abs(ypart(ur-ll)/(n+1));
+	else:
+		hu:=abs(xpart(ur-ll)/(n+1));
+		vu:=abs(ypart(ur-ll)/(n+2));
+	fi
 
 	pair za;
 	za=ll+(n+1)*(hu*(xpart rchtg),vu*(ypart rchtg));
@@ -66,51 +27,46 @@ def maeander(expr n,richtung,ll,ur) =
 	path p;
 	p:=ll -- za;
 	for a = n+1 step -1 until 1:
-		rchtg:=rchtg rotated -90;
+		rchtg:=rchtg rotated dreh;
 		za:=za + a*(hu*(xpart rchtg),vu*(ypart rchtg));
 		p := p -- za;
 	endfor;
 
 	pair center;
-	z0 = center=ll shifted 1/2[ll,ur];
+	z0 = center=1/2[ll,ur];
 	labels (0);
 
 	pickup pensquare scaled (u/(n+2));
+	draw p;
 	draw p -- reverse (p rotatedabout (center,180));
 
 enddef;
 
-beginchar(4,4u#,3u#,0); "hor maeander rechts";
-	n:=2;
-	hu:=w/(n+2);
-	vu:=h/(n+1);
+codeoffset:= 15;
 
-	pair rchtg;
-	rchtg:=up;
+for n = 0 step 1 until 8:
+	code:=codeoffset + n*16;
 
-	pair za;
-	za=origin+(n+1)*(hu*(xpart rchtg),vu*(ypart rchtg));
+	for bbox = (4,3),(3,4),(4,4):
+		for turn = 90,-90:
+			beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0); "hor maeander rechts";
+				maeander(n,up,-90,origin,(w,h));
+			endchar;
 
-	path p;
-	p:=origin -- za;
-	for a = n+1 step -1 until 1:
-		rchtg:=rchtg rotated -90;
-		za:=za + a*(hu*(xpart rchtg),vu*(ypart rchtg));
-		p := p -- za;
+			beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0); "hor maeander links";
+				maeander(n,down,90,(0,h),(w,0));
+			endchar;
+
+			beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0); "ver maeander rechts";
+				maeander(n,right,90,(0,0),(w,h));
+			endchar;
+
+			beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0); "ver maeander links";
+				maeander(n,right,-90,(0,h),(w,0));
+				%maeander(n,left,-90,(w,0),(0,h));
+			endchar;
+		endfor;
 	endfor;
-
-	pair center;
-	z0 = center=origin shifted (w/2,h/2);
-	labels (0);
-
-	pickup pensquare scaled (u/(n+2));
-	draw p -- reverse (p rotatedabout (center,180));
-
-endchar;
-
-beginchar(5,4u#,3u#,0); "hor maeander rechts";
-	maeander(4,up,origin,(w,h));
-endchar;
-
+endfor;
 end
 

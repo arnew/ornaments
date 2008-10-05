@@ -1,6 +1,5 @@
 
-test: clean ornamente.dvi 
-	#nfssfont.dvi
+test: clean ornamente.dvi nfssfont.dvi
 
 nfssfont.dvi: ornamente.mf
 	echo -e "ornamente \n \\\bigtest \\\bye\n" | latex nfssfont

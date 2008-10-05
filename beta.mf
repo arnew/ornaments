@@ -1,3 +1,5 @@
+mode_setup;
+
 u#:=4/9pt#;
 define_pixels(u);
 beginchar(66,13u#,16u#,5u#);"Letter beta";

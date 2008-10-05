@@ -1,0 +1,15 @@
+
+font_size=12pt#; % make the pxl or pk files be in ...\pixel\pxl1500
+
+u#:=3pt#;
+define_pixels(u);
+
+mode_setup;
+
+beginchar("a",4u#,4u#,0); "hor maeander";
+	
+
+endchar;
+
+end
+

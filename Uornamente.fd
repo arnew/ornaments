@@ -1,0 +1,9 @@
+\ProvidesFile{Uornamente.fd}[test 1]
+
+\DeclareFontFamily{U}{ornamente}{\hyphenchar\font=-1}
+
+\DeclareFontShape{U}{ornamente}{m}{n}{%
+	<-> ornamente
+	}{}
+
+\endinput

@@ -1,0 +1,188 @@
+
+msize#:=12pt#;
+font_size=msize#; % make the pxl or pk files be in ...\pixel\pxl1500
+u#:=1/6*msize#;
+
+mode_setup;
+
+define_pixels(u);
+
+picture hormaeander_rechts;
+
+def maeander(expr n,richtung,dreh,ll,ur) =
+	% normieren
+	pair rchtg;
+	%rchtg:=dir(angle(richtung));
+	rchtg:=richtung/length(richtung);
+
+	% schrittweiten hor/ver
+	if xpart(rchtg) = 0:
+		hu:=abs(xpart(ur-ll)/(n+2));
+		vu:=abs(ypart(ur-ll)/(n+1));
+	else:
+		hu:=abs(xpart(ur-ll)/(n+1));
+		vu:=abs(ypart(ur-ll)/(n+2));
+	fi
+
+	% startpunkt
+	pair za;
+	za=ll+(n+1)*(hu*(xpart rchtg),vu*(ypart rchtg));
+
+	% maeander 
+	path p;
+	p:=ll -- za;
+	for a = n+1 step -1 until 1:
+		rchtg:=rchtg rotated dreh;
+		za:=za + a*(hu*(xpart rchtg),vu*(ypart rchtg));
+		p := p -- za;
+	endfor;
+
+	pair center;
+	z0 = center=1/2[ll,ur];
+	labels (0);
+
+	pickup pensquare scaled (u/3);
+	draw p -- reverse (p rotatedabout (center,180));
+
+enddef;
+
+def eckeclosed(expr n,hv,ll,ur) =
+	% schrittweiten hor/ver
+	if ypart(hv) = 0:
+		hu:=(xpart(ur-ll)/(n+2));
+		vu:=(ypart(ur-ll)/(n+1));
+	else:
+		hu:=(xpart(ur-ll)/(n+1));
+		vu:=(ypart(ur-ll)/(n+2));
+	fi
+
+	pickup pensquare scaled (u/3);
+
+	for i = 1 step 1 until (n+1)/2 :
+		pair llbox,urbox;
+		llbox:=ll + i*(hu,vu);
+		urbox:=ur - i*(hu,vu);
+		draw llbox -- (xpart llbox,ypart urbox) -- urbox -- (xpart urbox, ypart llbox) -- cycle;
+	endfor;
+
+	path closer;
+	closer := (xpart(ll),ypart(ur))--ur--(xpart(ur),ypart(ll));
+	draw closer;
+
+enddef;
+
+def eckeopen(expr n,hv,ll,ur) =
+
+	% schrittweiten hor/ver
+	if ypart(hv) = 0:
+		hu:=(xpart(ur-ll)/(n+2));
+		vu:=(ypart(ur-ll)/(n+1));
+	else:
+		hu:=(xpart(ur-ll)/(n+1));
+		vu:=(ypart(ur-ll)/(n+2));
+	fi
+
+	pickup pensquare scaled (u/3);
+
+	for i = 1 step 1 until n/2+1:
+		pair llbox,urbox;
+		llbox:=ll + (i)*(hu,vu);
+		urbox:=ur - (i-1)*(hu,vu);
+		draw llbox -- (xpart llbox,ypart urbox) -- urbox -- (xpart urbox, ypart llbox) -- cycle;
+	endfor;
+
+enddef;
+
+code:=64;
+n:=0;
+
+pair bbox;
+bbox=(6,6);
+
+"hor maeander rechts";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	maeander(n,up,-90,origin,(w,h));
+endchar;
+"hor maeander links";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0); 
+	maeander(n,down,90,(0,h),(w,0));
+endchar;
+"ver maeander rechts";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0); 
+	maeander(n,right,90,(0,0),(w,h));
+endchar;
+"ver maeander links";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	maeander(n,right,-90,(0,h),(w,0));
+endchar;
+
+"hor ur open";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeopen(n,right,(origin),(w,h));
+endchar;
+"hor ur closed";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeclosed(n,right,(origin),(w,h));
+endchar;
+"ver ur open";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeopen(n,up,(origin),(w,h));
+endchar;
+"ver ur closed";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeclosed(n,up,(origin),(w,h));
+endchar;
+
+
+"hor ul open";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeopen(n,right,(w,0),(0,h));
+endchar;
+"hor ul closed";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeclosed(n,right,(w,0),(0,h));
+endchar;
+"ver ul open";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeopen(n,up,(w,0),(0,h));
+endchar;
+"ver ul closed";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeclosed(n,up,(w,0),(0,h));
+endchar;
+
+"hor ll open";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeopen(n,right,(w,h),(0,0));
+endchar;
+"hor ll closed";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeclosed(n,right,(w,h),(0,0));
+endchar;
+"ver ll open";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeopen(n,up,(w,h),(0,0));
+endchar;
+"ver ll closed";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeclosed(n,up,(w,h),(0,0));
+endchar;
+
+"hor lr open";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeopen(n,right,(0,h),(w,0));
+endchar;
+"hor lr closed";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeclosed(n,right,(0,h),(w,0));
+endchar;
+"ver lr open";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeopen(n,up,(0,h),(w,0));
+endchar;
+"ver lr closed";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	eckeclosed(n,up,(0,h),(w,0));
+endchar;
+end
+

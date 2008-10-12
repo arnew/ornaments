@@ -1,8 +1,23 @@
 \documentclass{article}
 \newfont{\ornas}{ornamente}
 \begin{document}
-{\ornas
-A B C D 
+
+\setlength{\unitlength}{5mm}%
+\begin{picture}(10,10)%
+\fontsize{5mm}{5mm}%
+\usefont{U}{ornamente}{m}{n}%
+\put(0,0){A}%
+\put(1,0){B}%
+\put(0,0){\framebox(1,1){}}%
+\end{picture}%
+
+\pagebreak
+
+{
+\fontsize{10mm}{10mm}
+\usefont{U}{ornamente}{m}{n}
+
+ABCD
 
 EFGH
 
@@ -12,16 +27,6 @@ MNOP
 
 QRST
 }
-
-\pagebreak
-\setlength{\unitlength}{5mm}%
-\begin{picture}(10,10)
-\fontsize{5mm}{5mm}
-\usefont{U}{ornamente}{m}{n}
-%\usefont{U}{cmr}{m}{n}
-\put(0,0){A}
-\put(1,0){B}
-\end{picture}
 
 \end{document}
 

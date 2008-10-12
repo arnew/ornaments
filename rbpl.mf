@@ -8,15 +8,43 @@ mode_setup;
 define_pixels(u);
 
 
-code:=64;
+picture char_p;
 
-n:=4;
+code:=0;
+for ar = 10 step 5 until 50:
+beginchar(incr code,3u#,8u#,0); "Buchstabe p";
+	pickup pencircle scaled 1/2u;
 
-pair bbox;
-bbox=(6,6);
+	bot lft z1=origin;
+	rt z2=(w,1/2h);
+	top lft z3=(0,h);
+
+	draw z1{dir ar}..z2{up}..{dir (180-ar)}z3;
+
+	labels (range 1 thru 3);
+endchar;
+endfor;
 
 "Buchstabe p";
-beginchar("p",6u#,3u#,0);
+beginchar("p",3u#,8u#,0);
+	ar = 40;
+	pickup pencircle scaled 1/2u;
+
+	bot lft z1=origin;
+	rt z2=(w,1/2h);
+	top lft z3=(0,h);
+
+	draw z1{dir ar}..z2{up}..{dir (180-ar)}z3;
+
+	labels (range 1 thru 3);
+	char_p:=currentpicture;
 endchar;
+
+"Buchstabe t";
+beginchar("t",3u#,8u#,0);
+	currentpicture:=currentpicture+char_p;
+	currentpicture:=currentpicture rotated 180 shifted (w,h);
+endchar;
+
 end
 

@@ -1,8 +1,10 @@
+FONT=ornamente
 
-test: clean ornamente.dvi nfssfont.dvi
+#test: clean ornamente.dvi nfssfont.dvi
+test: clean nfssfont.dvi ${FONT}.dvi 
 
-nfssfont.dvi: ornamente.mf
-	echo -e "ornamente \n \\\bigtest \\\bye\n" | latex nfssfont
+nfssfont.dvi: ${FONT}.mf
+	echo -e "${FONT} \n \\\bigtest \\\bye\n" | latex nfssfont
 	xdvi $@ &
 
 
@@ -14,4 +16,5 @@ nfssfont.dvi: ornamente.mf
 	mf '\input $<'
 
 clean:
+	git add ${FONT}.mf
 	git clean -f

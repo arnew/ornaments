@@ -1,0 +1,127 @@
+
+msize#:=12pt#;
+font_size=msize#; % make the pxl or pk files be in ...\pixel\pxl1500
+u#:=1/6*msize#;
+
+mode_setup;
+
+define_pixels(u);
+
+code:=64;
+n:=0;
+
+pair bbox;
+bbox=(6,6);
+
+picture buf;
+picture elem_a;
+
+numeric dist;
+dist := 0.2;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pickup pencircle scaled 1pt;
+
+	pair center;
+	center=0.5[origin,(w,h)];
+
+	z1=origin;
+	z2=center;
+	z3=(w,h);
+	
+	path p,q;
+	p := z1{right} .. {right}z3;
+	q := reverse p reflectedabout ((w/2,0),(w/2,h));
+
+	numeric t, u; 
+	(t, u) = p intersectiontimes q;
+	draw subpath (0, t-dist) of q;
+	draw subpath (0, u) of p;
+	%draw subpath (t+dist,infinity) of q;
+
+	elem_a:= currentpicture;
+
+	currentpicture := elem_a + elem_a rotatedabout (center,180);
+
+	buf:= currentpicture;
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf reflectedabout ((w/2,0),(w/2,h));
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pair center;
+	center=0.5[origin,(w,h)];
+	currentpicture := elem_a shifted (w/2,0) + elem_a rotatedabout (center,180) shifted (-w/2,0);
+	buf:= currentpicture;
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf reflectedabout ((w/2,0),(w/2,h));
+endchar;
+
+beginchar(incr code,1/2(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := elem_a;
+endchar;
+
+beginchar(incr code,1/2(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pair center;
+	center=0.5[origin,(w,h)];
+	currentpicture := elem_a rotatedabout (center,180);
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pickup pencircle scaled 1pt;
+
+	pair center;
+	center=0.5[origin,(w,h)];
+
+	z1=(0,ypart center);
+	z2=(xpart center,0);
+	z3=(w/2,h);
+	z4=(w,h/2);
+
+	path p,q;
+	p := z1{(w/4,-h/2)}..{(w/2,-h/4)}z2;
+	q := z1{(w/4,h/2)}..{right}z3..{down}z4..{(-w/2,-h/4)}z2;
+
+	draw subpath (dist,infinity) of p;
+	draw subpath (0,(length q)-dist) of q;
+	
+	buf:= currentpicture;
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pickup pencircle scaled 1pt;
+
+	pair center;
+	center=0.5[origin,(w,h)];
+
+	z1=(0,ypart center);
+	z2=(xpart center,0);
+	z3=(w/2,h);
+	z4=(w,h/2);
+
+	path p,q;
+	p := z1{(w/4,-h/2)}..{(w/2,-h/4)}z2;
+	q := z1{(w/4,h/2)}..{right}z3..{down}z4..{(-w/2,-h/4)}z2;
+
+	draw subpath (dist,infinity) of q;
+	draw subpath (0,(length p)-dist) of p;
+	
+	buf:= currentpicture;
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+endchar;
+
+
+end
+

@@ -41,7 +41,7 @@ def maeander(expr n,richtung,dreh,ll,ur) =
 	z0 = center=1/2[ll,ur];
 	labels (0);
 
-	pickup pensquare scaled (u/3);
+	pickup pensquare scaled (4/3*u/n);
 	draw p -- reverse (p rotatedabout (center,180));
 
 enddef;
@@ -56,7 +56,7 @@ def eckeclosed(expr n,hv,ll,ur) =
 		vu:=(ypart(ur-ll)/(n+2));
 	fi
 
-	pickup pensquare scaled (u/3);
+	pickup pensquare scaled (4/3*u/n);
 
 	for i = 1 step 1 until (n+1)/2 :
 		pair llbox,urbox;
@@ -82,7 +82,7 @@ def eckeopen(expr n,hv,ll,ur) =
 		vu:=(ypart(ur-ll)/(n+2));
 	fi
 
-	pickup pensquare scaled (u/3);
+	pickup pensquare scaled (4/3*u/n);
 
 	for i = 1 step 1 until n/2+1:
 		pair llbox,urbox;
@@ -94,10 +94,10 @@ def eckeopen(expr n,hv,ll,ur) =
 enddef;
 
 code:=64;
-n:=4;
+n:=6;
 
 pair bbox;
-bbox=(4,4);
+bbox=(6,6);
 
 "hor maeander rechts";
 beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);

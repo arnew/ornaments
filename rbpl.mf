@@ -1,0 +1,22 @@
+
+msize#:=12pt#;
+font_size=msize#; % make the pxl or pk files be in ...\pixel\pxl1500
+u#:=1/6*msize#;
+
+mode_setup;
+
+define_pixels(u);
+
+
+code:=64;
+
+n:=4;
+
+pair bbox;
+bbox=(6,6);
+
+"Buchstabe p";
+beginchar("p",6u#,3u#,0);
+endchar;
+end
+

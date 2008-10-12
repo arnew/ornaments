@@ -10,4 +10,6 @@
 	<-> ofloor
 	}{}
 
+\DeclareFontShape{U}{ornamente}{hund}{n}{ <-> ohund }{}
+
 \endinput

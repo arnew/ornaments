@@ -1,4 +1,5 @@
-FONT=ornamente
+
+FONT=omaeanderr
 
 #test: clean ornamente.dvi nfssfont.dvi
 test: clean nfssfont.dvi ${FONT}.dvi 

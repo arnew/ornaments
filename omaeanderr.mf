@@ -1,0 +1,28 @@
+
+msize#:=12pt#;
+font_size=msize#; % make the pxl or pk files be in ...\pixel\pxl1500
+u#:=1/6*msize#;
+
+mode_setup;
+
+define_pixels(u);
+
+code:=64;
+n:=0;
+
+pair bbox;
+bbox=(6,6);
+
+"hor maeander rechts";
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pickup pencircle scaled 1pt;
+	center=0.5[origin,(w,h)];
+	z1=(0,ypart center);
+	z2=center;
+	z3=(w,ypart center);
+	
+	draw z1{up}..z2{down}..{up}z3;
+	
+endchar;
+end
+

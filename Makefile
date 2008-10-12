@@ -1,7 +1,8 @@
 
-FONT=ohund
+FONT=ofloor
 
 #test: clean ornamente.dvi nfssfont.dvi
+#test: clean ${FONT}.dvi 
 test: clean nfssfont.dvi ${FONT}.dvi 
 
 nfssfont.dvi: ${FONT}.mf

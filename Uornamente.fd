@@ -1,9 +1,13 @@
 \ProvidesFile{Uornamente.fd}[test 1]
 
-\DeclareFontFamily{U}{ornamente}{\hyphenchar\font=-1}
+\DeclareFontFamily{U}{ornamente}{}
 
-\DeclareFontShape{U}{ornamente}{m}{n}{%
-	<-> ornamente
+\DeclareFontShape{U}{ornamente}{maeander}{n}{%
+	<-> omaeander
+	}{}
+
+\DeclareFontShape{U}{ornamente}{floor}{n}{%
+	<-> ofloor
 	}{}
 
 \endinput

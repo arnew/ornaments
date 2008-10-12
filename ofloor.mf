@@ -1,0 +1,113 @@
+
+msize#:=14pt#;
+font_size=msize#; % make the pxl or pk files be in ...\pixel\pxl1500
+u#:=1/6*msize#;
+
+mode_setup;
+
+define_pixels(u);
+
+def llgrid(expr steps) = 
+	pickup pencircle scaled 1/32pt;
+
+	draw origin -- (w/2,h/2);
+	draw (0,h/2) -- (w/2,0);
+
+	numeric sw; sw := steps;
+
+	for i = 1 step 1 until sw/2:
+		draw (0,i*h/sw) -- (w/2,i*h/sw);
+	endfor;
+enddef;
+
+code:=63;
+n:=0;
+
+pair bbox;
+bbox=(6,6);
+
+picture buf;
+picture ll;
+
+pickup pencircle scaled 1/2pt;
+defaultpen := savepen;
+
+def defaultpoints = 
+	pair center; center=0.5[origin,(w,h)];
+
+	top z101=(0,h/2);
+	top z102=(2/16w,h/2);
+	rt z103=(w/2,2/16h);
+	rt z104=(w/2,0);
+enddef;
+
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	llgrid(32);
+
+	pair center;
+	center=0.5[origin,(w,h)];
+
+	ll := currentpicture + currentpicture reflectedabout (origin,center);
+	currentpicture := ll + ll rotatedabout (center,90) + ll rotatedabout (center,180) + ll rotatedabout (center,270);
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+
+	pair center;
+	center=0.5[origin,(w,h)];
+
+	if mode = 1:
+	llgrid(32);
+	fi;
+
+	pickup defaultpen;
+	defaultpoints;
+	picture ll;
+
+
+	z3=(4/16w,6/16h);
+	z4=(3/16w,5/16h);
+	z10=(3/16w,13/32h);
+
+
+	%draw z1 -- flex(z2,z3,z10);
+	draw z101 -- z102{right} .. z3{down} .. z4 .. {right}z10;
+	labels (range 1 thru 10);
+	%draw z1{right} -- z2{right}    .. {right}z8;
+
+	ll := currentpicture + currentpicture reflectedabout (origin,center);
+
+	currentpicture := ll + ll rotatedabout (center,90) + ll rotatedabout (center,180) + ll rotatedabout (center,270);
+
+	buf:= currentpicture;
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pickup defaultpen;
+	defaultpoints;
+
+	pair center;
+	center=0.5[origin,(w,h)];
+
+	picture ll;
+
+	top z1=(0,h/2);
+	rt z3=(w/2,0);
+
+	path p;
+	p := z101..z102{right};
+	p := p .. reverse p reflectedabout (origin,center);
+
+	%draw z1{right} .. z3{down};
+	draw p;
+	ll := currentpicture;
+
+	currentpicture := currentpicture + ll rotatedabout (center,90) + ll rotatedabout (center,180) + ll rotatedabout (center,270);
+
+	buf:= currentpicture;
+endchar;
+
+
+end
+

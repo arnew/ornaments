@@ -13,10 +13,12 @@ n:=0;
 pair bbox;
 bbox=(6,6);
 
-"hor maeander rechts";
 beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
 	pickup pencircle scaled 1pt;
+
+	pair center;
 	center=0.5[origin,(w,h)];
+
 	z1=(0,ypart center);
 	z2=center;
 	z3=(w,ypart center);
@@ -24,5 +26,151 @@ beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
 	draw z1{up}..z2{down}..{up}z3;
 	
 endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pickup pencircle scaled 1pt;
+
+	pair center;
+	center=0.5[origin,(w,h)];
+
+	z1=(0,ypart center);
+	z2=center;
+	z3=(w,ypart center);
+	
+	draw flex(z1,z2,z3);
+	
+endchar;
+
+picture buf;
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pickup pencircle scaled 1pt;
+
+	pair center;
+	center=0.5[origin,(w,h)];
+
+	z1=origin;
+	z2=center;
+	z3=(w,h);
+	
+	draw z1{right}..z2{left}..{right}z3;
+
+	buf:= currentpicture;
+	
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := currentpicture + buf;
+	currentpicture := currentpicture reflectedabout ((w/2,0),(w/2,h));
+endchar;
+
+numeric dist;
+dist := 0.2;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pickup pencircle scaled 1pt;
+
+	pair center;
+	center=0.5[origin,(w,h)];
+
+	z1=origin;
+%	z2=center;
+	z3=(w,h);
+	
+	path p,q;
+	p := z1{right} .. {right}z3;
+	q := p reflectedabout ((w/2,0),(w/2,h));
+
+	draw p;
+
+	numeric t, u; 
+	(t, u) = p intersectiontimes q;
+	draw subpath (0, t-dist) of q;
+	draw subpath (t+dist,infinity) of q;
+
+	buf:= currentpicture;
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := currentpicture + buf;
+	currentpicture := currentpicture reflectedabout ((w/2,0),(w/2,h));
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pickup pencircle scaled 1pt;
+
+	pair center;
+	center=0.5[origin,(w,h)];
+
+	z1=(0,ypart center);
+	z2=(xpart center,h);
+	z3=(w,ypart center);
+	
+	path p,q;
+	p:= z1{(w/4,h/2)}..z2{right}..{(w/4,-h/2)}z3;
+	q := p reflectedabout ((0,h/2),(w,h/2));
+
+	draw subpath (dist,infinity) of p;
+	draw subpath (0,(length q)-dist) of q;
+	
+	buf:= currentpicture;
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := currentpicture + buf;
+	currentpicture := currentpicture reflectedabout ((w/2,0),(w/2,h));
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pickup pencircle scaled 1pt;
+
+	pair center;
+	center=0.5[origin,(w,h)];
+
+	z1=(0,ypart center);
+	z2=(xpart center,0);
+	z3=(w/2,h);
+	z4=(w,h/2);
+
+	path p,q;
+	p := z1{(w/4,-h/2)}..{(w/2,-h/4)}z2;
+	q := z1{(w/4,h/2)}..{right}z3..{down}z4..{(-w/2,-h/4)}z2;
+
+	draw subpath (dist,infinity) of p;
+	draw subpath (0,(length q)-dist) of q;
+	
+	buf:= currentpicture;
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pickup pencircle scaled 1pt;
+
+	pair center;
+	center=0.5[origin,(w,h)];
+
+	z1=(0,ypart center);
+	z2=(xpart center,0);
+	z3=(w/2,h);
+	z4=(w,h/2);
+
+	path p,q;
+	p := z1{(w/4,-h/2)}..{(w/2,-h/4)}z2;
+	q := z1{(w/4,h/2)}..{right}z3..{down}z4..{(-w/2,-h/4)}z2;
+
+	draw subpath (dist,infinity) of q;
+	draw subpath (0,(length p)-dist) of p;
+	
+	buf:= currentpicture;
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+endchar;
+
+
 end
 

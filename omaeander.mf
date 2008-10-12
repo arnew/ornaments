@@ -94,7 +94,7 @@ def eckeopen(expr n,hv,ll,ur) =
 enddef;
 
 code:=64;
-n:=0;
+n:=4;
 
 pair bbox;
 bbox=(6,6);

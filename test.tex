@@ -1,0 +1,79 @@
+\documentclass{scrartcl}
+
+
+\typearea{12}
+
+\usepackage[utf8]{inputenc}
+
+\newcommand{\wb}[2]{\fontsize{#1}{#2}\usefont{U}{ornamente}{maeander}{n}}
+
+\setlength{\unitlength}{1mm}%
+
+\begin{document}
+% make your default ticket. \ticketdefault is somewhat like a background
+
+\begin{picture}(65,100)
+\put(0,0){{%
+\fontsize{5mm}{5mm}%
+\usefont{U}{ornamente}{maeander}{n}%
+\multiput(5,95)(5,0){11}{\makebox(5,5)[t]{A}}%       Upper border
+\put(60,95){\makebox(5,5)[t]{F}}%                     Upper right corner
+\multiput(60,90)(0,-5){18}{\makebox(5,5)[t]{C}}%   Right border
+\put(60,0){\makebox(5,5)[t]{S}}%                  Lower right corner
+\multiput(5,0)(5,0){11}{\makebox(5,5)[t]{A}}%    Lower border
+\put(0,0){\makebox(5,5)[t]{N}}%                    Lower left corner
+\multiput(0,90)(0,-5){18}{\makebox(5,5)[t]{C}}%     Left border
+\put(0,95){\makebox(5,5)[t]{K}}%                       Upper left corner
+}}%
+\end{picture}
+%
+\begin{picture}(65,100)
+\put(0,0){{%
+\fontsize{5mm}{5mm}%
+\usefont{U}{ornamente}{maeander}{n}%
+\put(0,95){LCDCDCDCDCDCH}%       Upper border
+\multiput(0,90)(0,-10){9}{A}%     Left border
+\multiput(0,85)(0,-10){9}{B}%     Left border
+\put(0,0){PDCDCDCDCDCDT}%       Upper border
+\multiput(60,90)(0,-10){9}{A}%     Left border
+\multiput(60,85)(0,-10){9}{B}%     Left border
+}}%
+\put(5,5){{%
+\fontsize{5mm}{5mm}%
+\usefont{U}{ornamente}{floor}{n}%
+%\multiput(0,0)(0,10){9}{AB}%       Upper border
+%\multiput(0,5)(0,10){9}{BA}%       Upper border
+%\multiput(45,0)(0,10){9}{BA}%       Upper border
+%\multiput(45,5)(0,10){9}{AB}%       Upper border
+%\put(10,0){ABABABA}%       Upper border
+%\put(10,5){BABABAB}%       Upper border
+%\put(10,80){ABABABA}%       Upper border
+%\put(10,85){BABABAB}%       Upper border
+\multiput(0,0)(0,10){9}{ABABABABABA}%       Upper border
+\multiput(0,5)(0,10){9}{BABABABABAB}%       Upper border
+}}%
+\end{picture}
+
+\begin{picture}(65,100)
+\put(0,0){{%
+\fontsize{5mm}{5mm}%
+\usefont{U}{ornamente}{hund}{n}%
+\multiput(5,95)(5,0){11}	{E}% Upper border
+\put(60,95)			{Q}% Upper right corner
+\multiput(60,90)(0,-5){18}	{F}% Right border
+\put(60,0)			{T}% Lower right corner
+\multiput(5,0)(5,0){11}		{E}% Lower border
+\put(0,0)			{S}% Lower left corner
+\multiput(0,90)(0,-5){18}	{F}% Left border
+\put(0,95)			{R}% Upper left corner
+}}%
+\end{picture}
+
+\vspace{1cm}
+
+\fontsize{5mm}{5mm}%
+\usefont{U}{ornamente}{blaetter}{n}%
+CDCDEFEFCFCFEDED
+
+\end{document}
+

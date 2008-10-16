@@ -35,8 +35,8 @@ beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
 
 	numeric t, u; 
 	(t, u) = p intersectiontimes q;
-	draw subpath (0, t-dist) of q;
-	draw subpath (0, u) of p;
+	draw subpath (0, u-dist) of q;
+	draw subpath (0, t) of p;
 	%draw subpath (t+dist,infinity) of q;
 
 	elem_a:= currentpicture;
@@ -47,8 +47,17 @@ beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
 endchar;
 
 beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf reflectedabout ((w/2,0),(w/2,h));
+	currentpicture := buf rotatedabout ((w/2,h/2),90);
 endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),180);
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),270);
+endchar;
+
 
 beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
 	pair center;
@@ -56,72 +65,131 @@ beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
 	currentpicture := elem_a shifted (w/2,0) + elem_a rotatedabout (center,180) shifted (-w/2,0);
 	buf:= currentpicture;
 endchar;
-
 beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf reflectedabout ((w/2,0),(w/2,h));
+	currentpicture := buf rotatedabout ((w/2,h/2),90);
 endchar;
 
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),180);
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),270);
+endchar;
+
+%%%%%%%%%%%%%%%%%%%%%
 beginchar(incr code,1/2(xpart bbox)*u#,(ypart bbox)*u#,0);
 	currentpicture := elem_a;
+	buf:= currentpicture;
+endchar;
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),90);
 endchar;
 
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),180);
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),270);
+endchar;
+
+%%%%%%%%%%%%%%%%%%%
 beginchar(incr code,1/2(xpart bbox)*u#,(ypart bbox)*u#,0);
-	pair center;
-	center=0.5[origin,(w,h)];
-	currentpicture := elem_a rotatedabout (center,180);
+	currentpicture := elem_a reflectedabout ((w/2,0),(w/2,h));
+	buf:= currentpicture;
+endchar;
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),90);
 endchar;
 
 beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),180);
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),270);
+endchar;
+
+%%%%%%%%%%%%
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
 	pickup pencircle scaled 1pt;
 
-	pair center;
-	center=0.5[origin,(w,h)];
+	z1 = origin	shifted -(w/2,0);
+	z2 = (w,h)	shifted -(w/2,0);
+	z3 = (w,h)	shifted -(0,h/2);
+	z4 = origin	shifted -(0,h/2);
 
-	z1=(0,ypart center);
-	z2=(xpart center,0);
-	z3=(w/2,h);
-	z4=(w,h/2);
+	z9 = (0,h/2);
+	z10 = (w/2,0);
 
 	path p,q;
-	p := z1{(w/4,-h/2)}..{(w/2,-h/4)}z2;
-	q := z1{(w/4,h/2)}..{right}z3..{down}z4..{(-w/2,-h/4)}z2;
+	p := z1{right} .. {right}z2 .. {down}z3 .. {down}z4;
+	p := subpath (1/2,length(p)-1/2) of p;
+	q := z9{dir(360-angle(direction 0 of p))} .. {dir(180-angle(direction length(p) of p))}z10;
 
-	draw subpath (dist,infinity) of p;
-	draw subpath (0,(length q)-dist) of q;
-	
+	u := ypart(p intersectiontimes q);
+	q := subpath (u+2*dist,infinity) of q;
+
+	t := xpart(p intersectiontimes q);
+	p := subpath (0,t-2.5*dist) of p;
+
+	draw p;
+	draw q;
 	buf:= currentpicture;
 endchar;
 
 beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),90);
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),180);
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),270);
+endchar;
+
+%%%%%%%%%%%%
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
 	pickup pencircle scaled 1pt;
 
-	pair center;
-	center=0.5[origin,(w,h)];
+	z1 = origin	shifted -(w/2,0);
+	z2 = (w,h)	shifted -(w/2,0);
+	z3 = (w,h)	shifted -(0,h/2);
+	z4 = origin	shifted -(0,h/2);
 
-	z1=(0,ypart center);
-	z2=(xpart center,0);
-	z3=(w/2,h);
-	z4=(w,h/2);
+	z9 = (0,h/2);
+	z10 = (w/2,0);
 
 	path p,q;
-	p := z1{(w/4,-h/2)}..{(w/2,-h/4)}z2;
-	q := z1{(w/4,h/2)}..{right}z3..{down}z4..{(-w/2,-h/4)}z2;
+	p := z1{right} .. {right}z2 .. {down}z3 .. {down}z4;
+	p := subpath (1/2,length(p)-1/2) of p;
+	q := z9{dir(360-angle(direction 0 of p))} .. {dir(180-angle(direction length(p) of p))}z10;
 
-	draw subpath (dist,infinity) of q;
-	draw subpath (0,(length p)-dist) of p;
-	
+	u := xpart(p intersectiontimes q);
+	p := subpath (u+2.5*dist,infinity) of p;
+
+	t := ypart(p intersectiontimes q);
+	q := subpath (0,t-2*dist) of q;
+
+	draw p;
+	draw q;
 	buf:= currentpicture;
 endchar;
 
 beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),90);
 endchar;
 
 beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),180);
 endchar;
 
 beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),270);
 endchar;
-
 
 end
 

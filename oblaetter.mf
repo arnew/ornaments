@@ -1,0 +1,140 @@
+
+msize#:=14pt#;
+font_size=msize#; % make the pxl or pk files be in ...\pixel\pxl1500
+u#:=1/6*msize#;
+
+mode_setup;
+
+define_pixels(u);
+
+def cutbefore (expr p, q) =
+	subpath ( xpart(p intersectiontimes q ), length p ) of p;
+enddef;
+
+def grid(expr steps) = 
+	pickup pencircle scaled 1/32pt;
+
+	draw origin -- (w,h);
+	draw (0,h) -- (w,0);
+
+	numeric sw; sw := steps;
+
+	for i = 1 step 1 until sw:
+		draw (0,i*h/sw) -- (w,i*h/sw);
+		draw (i*w/sw,0) -- (i*w/sw,h);
+	endfor;
+enddef;
+
+code:=64;
+n:=0;
+
+pair bbox;
+bbox=(6,6);
+
+picture buf;
+picture ll;
+
+pickup pencircle scaled 1/2pt;
+defaultpen := savepen;
+
+def defaultpoints = 
+	pair ll,lr,ul,ur;
+	ll := origin;
+	lr := (w,0);
+	ul := (0,h);
+	ur := (w,h);
+
+	pair center; center=0.5[origin,(w,h)];
+
+	z101=(0,h/2);
+	z102=(w,h/2);
+	labels (range 101 thru 102);
+	labels (ll,lr,ul,ur,center);
+enddef;
+
+numeric wankel,blattwinkel,zweigansatz,zentrum,blattansatz;
+numeric stuetz[], stuetzw[];
+wankel = 30;
+blattwinkel = 10;
+zweigansatz = 1/6;
+blattansatz = 3/8;
+zentrum = 3/4;
+rippenlaenge = 2/4;
+stuetz1 = 1/4;
+stuetz2 = 2/4;
+stuetzw1 = 1/2;
+stuetzw2 = 1/3;
+
+%for wankel = 0 step 5 until 85:
+%for blattwinkel = 5 step 5 until 90:
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	defaultpoints;
+	pickup defaultpen;
+
+	%path p;		p := z102{dir (180-wankel)} .. center shifted (0,h/8) .. z101;
+	path p;		p := z102{dir (180-wankel)} .. {dir (180 + wankel)}z101;
+	draw p;
+
+	
+	path rippe;
+	pair n[];
+
+	n1 = dir (180-blattwinkel);
+	n2 = dir (90-blattwinkel);
+
+	z1 = point zweigansatz of p;
+
+	z20 = p intersectionpoint ((w/2,0) .. (w/2,h));
+	x2 = w/2; y2 = zentrum[y20,h];
+
+	z3 = (origin .. infinity[origin,n1]) shifted z1 intersectionpoint (ll -- ul -- ur);
+	%z4 = whatever[ul,ur];
+
+	rippe := z1{direction zweigansatz of p} .. z2 .. z3;
+
+	numeric blen;
+	blen := 1-blattansatz;
+
+	draw subpath (0,(rippenlaenge*blen+blattansatz)*length(rippe)) of rippe;
+
+	z4 = point blattansatz*length(rippe) of rippe;
+
+	z5 = point (stuetz1*blen+blattansatz)*length(rippe) of rippe;
+	n5 = dir(90+angle(direction (stuetz1*blen+blattansatz)*length(rippe) of rippe));
+
+	z6 = point (stuetz2*blen+blattansatz)*length(rippe) of rippe;
+	n6 = dir(90 + angle(direction (stuetz2*blen+blattansatz)*length(rippe) of rippe));
+
+	z10 = z5 + stuetzw1*n5*blen*length(z3-z4);
+	z11 = z5 - stuetzw1*n5*blen*length(z3-z4);
+	z12 = z6 + stuetzw2*n6*blen*length(z3-z4);
+	z13 = z6 - stuetzw2*n6*blen*length(z3-z4);
+
+	draw z4 .. z10 .. z12 .. z3;
+	draw z4 .. z11 .. z13 .. z3;
+
+	labels (range 1 thru 99);
+
+	buf:= currentpicture;
+
+	if mode = 1:
+		grid(32);
+	fi;
+endchar;
+
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	defaultpoints;
+	currentpicture := buf reflectedabout (z101,z102);
+endchar;
+%endfor;
+%endfor;
+
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	%grid(32);
+%endchar;
+
+
+end
+

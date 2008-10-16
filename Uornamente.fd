@@ -12,4 +12,6 @@
 
 \DeclareFontShape{U}{ornamente}{hund}{n}{ <-> ohund }{}
 
+\DeclareFontShape{U}{ornamente}{blaetter}{n}{ <-> oblaetter }{}
+
 \endinput

@@ -1,5 +1,5 @@
 
-FONT=ofloor
+FONT=oblaetter
 
 #test: clean ornamente.dvi nfssfont.dvi
 #test: clean ${FONT}.dvi 

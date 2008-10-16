@@ -1,0 +1,22 @@
+
+obase:=1;
+
+def cutbefore (expr p, q) =
+	subpath ( xpart(p intersectiontimes q ), length p ) of p;
+enddef;
+
+def grid(expr steps) = 
+	if mode = 1:
+		pickup pencircle scaled 1/32pt;
+
+		draw origin -- (w,h);
+		draw (0,h) -- (w,0);
+
+		numeric sw; sw := steps;
+
+		for i = 1 step 1 until sw:
+			draw (0,i*h/sw) -- (w,i*h/sw);
+			draw (i*w/sw,0) -- (i*w/sw,h);
+		endfor;
+	fi;
+enddef;

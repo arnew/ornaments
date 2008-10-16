@@ -7,20 +7,10 @@
 %
 % CC by-nc-sa; 2008 by Arne Wichmann
 %
+if unknown obase: input obase fi
 
-msize#:=12pt#;
-font_size=msize#; % make the pxl or pk files be in ...\pixel\pxl1500
-u#:=1/6*msize#;
-
-mode_setup;
-
-define_pixels(u);
-
-code:=64;
+code:=1;
 n:=0;
-
-pair bbox;
-bbox=(6,6);
 
 picture buf;
 picture elem_a;
@@ -29,14 +19,10 @@ numeric dist;
 dist := 0.2;
 
 beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	pickup pencircle scaled 1pt;
+	pickup defaultpen;
 
-	pair center;
-	center=0.5[origin,(w,h)];
-
-	z1=origin;
-	z2=center;
-	z3=(w,h);
+	bot z1=origin;
+	top z3=(w,h);
 	
 	path p,q;
 	p := z1{right} .. {right}z3;
@@ -49,84 +35,148 @@ beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
 	%draw subpath (t+dist,infinity) of q;
 
 	elem_a:= currentpicture;
-
-	currentpicture := elem_a + elem_a rotatedabout (center,180);
-
-	buf:= currentpicture;
 endchar;
 
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf rotatedabout ((w/2,h/2),90);
-endchar;
-
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf rotatedabout ((w/2,h/2),180);
-endchar;
-
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf rotatedabout ((w/2,h/2),270);
-endchar;
-
-
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := buf rotatedabout ((w/2,h/2),90);
+%endchar;
+%
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := buf rotatedabout ((w/2,h/2),180);
+%endchar;
+%
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := buf rotatedabout ((w/2,h/2),270);
+%endchar;
+%
+%
+beginchar("0",(xpart bbox)*u#,(ypart bbox)*u#,0);
 	pair center;
 	center=0.5[origin,(w,h)];
 	currentpicture := elem_a shifted (w/2,0) + elem_a rotatedabout (center,180) shifted (-w/2,0);
 	buf:= currentpicture;
 endchar;
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+beginchar("1",(xpart bbox)*u#,(ypart bbox)*u#,0);
 	currentpicture := buf rotatedabout ((w/2,h/2),90);
 endchar;
 
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf rotatedabout ((w/2,h/2),180);
-endchar;
+beginchar("2",(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pair center;
+	center=0.5[origin,(w,h)];
+	currentpicture := elem_a shifted (w/2,0) + elem_a rotatedabout (center,180) shifted (-w/2,0);
 
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf rotatedabout ((w/2,h/2),270);
-endchar;
+	pickup defaultpen;
+	top z1 = (w/2,h);
+	bot z3 = (w/2,h/8);
+	z2 = 1/2[z1,z3];
 
-%%%%%%%%%%%%%%%%%%%%%
-beginchar(incr code,1/2(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := elem_a;
+	blatteins(z1,right,z2,z3);
+
 	buf:= currentpicture;
 endchar;
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+beginchar("3",(xpart bbox)*u#,(ypart bbox)*u#,0);
 	currentpicture := buf rotatedabout ((w/2,h/2),90);
 endchar;
+beginchar("4",(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pair center;
+	center=0.5[origin,(w,h)];
+	currentpicture := elem_a shifted (w/2,0) + elem_a rotatedabout (center,180) shifted (-w/2,0);
 
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf rotatedabout ((w/2,h/2),180);
-endchar;
+	pickup defaultpen;
+	top z1 = (w/2,h);
+	bot z3 = (w/2,h/8);
+	z2 = 1/2[z1,z3];
 
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf rotatedabout ((w/2,h/2),270);
-endchar;
+	blatteins(z1,left,z2,z3);
 
-%%%%%%%%%%%%%%%%%%%
-beginchar(incr code,1/2(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := elem_a reflectedabout ((w/2,0),(w/2,h));
 	buf:= currentpicture;
 endchar;
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+beginchar("5",(xpart bbox)*u#,(ypart bbox)*u#,0);
 	currentpicture := buf rotatedabout ((w/2,h/2),90);
 endchar;
 
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf rotatedabout ((w/2,h/2),180);
-endchar;
+beginchar("6",(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pair center;
+	center=0.5[origin,(w,h)];
+	currentpicture := elem_a shifted (w/2,0) + elem_a rotatedabout (center,180) shifted (-w/2,0);
 
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf rotatedabout ((w/2,h/2),270);
-endchar;
+	pickup defaultpen;
+	bot z1 = (w/2,0);
+	top z3 = (w/2,7/8h);
+	z2 = 1/2[z1,z3];
 
-%%%%%%%%%%%%
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	pickup pencircle scaled 1pt;
+	blatteins(z1,right,z2,z3);
+
+	buf:= currentpicture;
+endchar;
+beginchar("7",(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),90);
+endchar;
+beginchar("8",(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pair center;
+	center=0.5[origin,(w,h)];
+	currentpicture := elem_a shifted (w/2,0) + elem_a rotatedabout (center,180) shifted (-w/2,0);
+
+	pickup defaultpen;
+	bot z1 = (w/2,0);
+	top z3 = (w/2,7/8h);
+	z2 = 1/2[z1,z3];
+
+	blatteins(z1,left,z2,z3);
+
+	buf:= currentpicture;
+endchar;
+beginchar("9",(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),90);
+endchar;
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := buf rotatedabout ((w/2,h/2),180);
+%endchar;
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := buf rotatedabout ((w/2,h/2),270);
+%endchar;
+%
+%%%%%%%%%%%%%%%%%%%%%%
+%beginchar(incr code,1/2(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := elem_a;
+%	buf:= currentpicture;
+%endchar;
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := buf rotatedabout ((w/2,h/2),90);
+%endchar;
+%
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := buf rotatedabout ((w/2,h/2),180);
+%endchar;
+%
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := buf rotatedabout ((w/2,h/2),270);
+%endchar;
+%
+%%%%%%%%%%%%%%%%%%%%
+%beginchar(incr code,1/2(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := elem_a reflectedabout ((w/2,0),(w/2,h));
+%	buf:= currentpicture;
+%endchar;
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := buf rotatedabout ((w/2,h/2),90);
+%endchar;
+%
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := buf rotatedabout ((w/2,h/2),180);
+%endchar;
+%
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := buf rotatedabout ((w/2,h/2),270);
+%endchar;
+%
+%%%%%%%%%%%%%
+beginchar("b",(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pickup defaultpen;
 
 	z1 = origin	shifted -(w/2,0);
-	z2 = (w,h)	shifted -(w/2,0);
-	z3 = (w,h)	shifted -(0,h/2);
+	top z2 = (w,h)	shifted -(w/2,0);
+	rt z3 = (w,h)	shifted -(0,h/2);
 	z4 = origin	shifted -(0,h/2);
 
 	z9 = (0,h/2);
@@ -148,25 +198,25 @@ beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
 	buf:= currentpicture;
 endchar;
 
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf rotatedabout ((w/2,h/2),90);
+beginchar("c",(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),-90);
 endchar;
 
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf rotatedabout ((w/2,h/2),180);
+beginchar("d",(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),-180);
 endchar;
 
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf rotatedabout ((w/2,h/2),270);
+beginchar("a",(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),-270);
 endchar;
 
-%%%%%%%%%%%%
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	pickup pencircle scaled 1pt;
+%%%%%%%%%%%%%
+beginchar("f",(xpart bbox)*u#,(ypart bbox)*u#,0);
+	pickup defaultpen;
 
 	z1 = origin	shifted -(w/2,0);
-	z2 = (w,h)	shifted -(w/2,0);
-	z3 = (w,h)	shifted -(0,h/2);
+	top z2 = (w,h)	shifted -(w/2,0);
+	rt z3 = (w,h)	shifted -(0,h/2);
 	z4 = origin	shifted -(0,h/2);
 
 	z9 = (0,h/2);
@@ -177,28 +227,76 @@ beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
 	p := subpath (1/2,length(p)-1/2) of p;
 	q := z9{dir(360-angle(direction 0 of p))} .. {dir(180-angle(direction length(p) of p))}z10;
 
-	u := xpart(p intersectiontimes q);
-	p := subpath (u+2.5*dist,infinity) of p;
+	u := ypart(p intersectiontimes q);
+	q := subpath (u+2*dist,infinity) of q;
 
-	t := ypart(p intersectiontimes q);
-	q := subpath (0,t-2*dist) of q;
+	t := xpart(p intersectiontimes q);
+	p := subpath (0,t-2.5*dist) of p;
 
 	draw p;
 	draw q;
+
+	z11 = p intersectionpoint (origin .. (w,h));
+	z13 = q intersectionpoint (origin .. (w,h));
+	z12 = 1/2[z11,z13];
+	z14 = 7/8[z11,z13];
+
+	blatteins(z11,right + down,z12,z14);
+
 	buf:= currentpicture;
 endchar;
 
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf rotatedabout ((w/2,h/2),90);
+beginchar("g",(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),-90);
 endchar;
 
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf rotatedabout ((w/2,h/2),180);
+beginchar("h",(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),-180);
 endchar;
 
-beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-	currentpicture := buf rotatedabout ((w/2,h/2),270);
+beginchar("e",(xpart bbox)*u#,(ypart bbox)*u#,0);
+	currentpicture := buf rotatedabout ((w/2,h/2),-270);
 endchar;
+
+%%%%%%%%%%%%%
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	pickup defaultpen;
+%
+%	z1 = origin	shifted -(w/2,0);
+%	top z2 = (w,h)	shifted -(w/2,0);
+%	rt z3 = (w,h)	shifted -(0,h/2);
+%	z4 = origin	shifted -(0,h/2);
+%
+%	z9 = (0,h/2);
+%	z10 = (w/2,0);
+%
+%	path p,q;
+%	p := z1{right} .. {right}z2 .. {down}z3 .. {down}z4;
+%	p := subpath (1/2,length(p)-1/2) of p;
+%	q := z9{dir(360-angle(direction 0 of p))} .. {dir(180-angle(direction length(p) of p))}z10;
+%
+%	u := xpart(p intersectiontimes q);
+%	p := subpath (u+2.5*dist,infinity) of p;
+%
+%	t := ypart(p intersectiontimes q);
+%	q := subpath (0,t-2*dist) of q;
+%
+%	draw p;
+%	draw q;
+%	buf:= currentpicture;
+%endchar;
+%
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := buf rotatedabout ((w/2,h/2),90);
+%endchar;
+%
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := buf rotatedabout ((w/2,h/2),180);
+%endchar;
+%
+%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+%	currentpicture := buf rotatedabout ((w/2,h/2),270);
+%endchar;
 
 end
 

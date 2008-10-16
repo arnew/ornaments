@@ -7,7 +7,22 @@
 %
 % CC by-nc-sa; 2008 by Arne Wichmann
 %
+%if unknown obase: input obase fi
 obase:=1;
+
+msize#:=14pt#;
+font_size=msize#; % make the pxl or pk files be in ...\pixel\pxl1500
+u#:=1/6*msize#;
+
+pair bbox;
+bbox=(6,6);
+
+mode_setup;
+
+define_pixels(u);
+
+pickup pencircle scaled 1/2pt;
+defaultpen := savepen;
 
 def cutbefore (expr p, q) =
 	subpath ( xpart(p intersectiontimes q ), length p ) of p;
@@ -27,4 +42,68 @@ def grid(expr steps) =
 			draw (i*w/sw,0) -- (i*w/sw,h);
 		endfor;
 	fi;
+enddef;
+
+def blatttypeins (expr orig,arc,center,tip,blattansatz,rippenlaenge,stuetza,stuetzb,stuetzwa,stuetzwb) =
+	path rippe;
+	pair n[];
+	pair blattz[];
+
+	pickup defaultpen;
+
+	blattz1 = orig; blattz2 = center; blattz3 = tip;
+	rippe := blattz1{arc} .. blattz2 .. blattz3;
+
+	numeric blen; blen := 1-blattansatz;
+
+	blattz4 = point blattansatz*length(rippe) of rippe;
+
+	blattz5 = point (stuetza*blen+blattansatz)*length(rippe) of rippe;
+	n5 = dir(90+angle(direction (stuetza*blen+blattansatz)*length(rippe) of rippe));
+
+	blattz6 = point (stuetzb*blen+blattansatz)*length(rippe) of rippe;
+	n6 = dir(90 + angle(direction (stuetzb*blen+blattansatz)*length(rippe) of rippe));
+
+	blattz10 = blattz5 + stuetzwa*n5*blen/2*length(blattz3-blattz4);
+	blattz11 = blattz5 - stuetzwa*n5*blen/2*length(blattz3-blattz4);
+	blattz12 = blattz6 + stuetzwb*n6*blen/2*length(blattz3-blattz4);
+	blattz13 = blattz6 - stuetzwb*n6*blen/2*length(blattz3-blattz4);
+
+	draw subpath (0,(rippenlaenge*blen+blattansatz)*length(rippe)) of rippe;
+
+	draw blattz4 .. blattz10 .. blattz12 .. blattz3;
+	draw blattz4 .. blattz11 .. blattz13 .. blattz3;
+
+	labels (range 1 thru 99);
+
+enddef;
+
+def blatteins (expr orig,arc,center,tip) =
+	numeric blattansatz,rippenlaenge;
+	numeric stuetz[], stuetzw[];
+
+	blattansatz = 3/8;
+	rippenlaenge = 2/4;
+	stuetz1 = 1/4;
+	stuetz2 = 2/4;
+	stuetzw1 = 1;
+	stuetzw2 = 2/3;
+
+	blatttypeins (orig,arc,center,tip,blattansatz,rippenlaenge,stuetz1,stuetz2,stuetzw1,stuetzw2);
+
+enddef;
+
+def blattzwei (expr orig,arc,center,tip) =
+	numeric blattansatz,rippenlaenge;
+	numeric stuetz[], stuetzw[];
+
+	blattansatz = 3/8;
+	rippenlaenge = 2/4;
+	stuetz1 = 0/4;
+	stuetz2 = 2/4;
+	stuetzw1 = 1;
+	stuetzw2 = 2/3;
+
+	blatttypeins (orig,arc,center,tip,blattansatz,rippenlaenge,stuetz1,stuetz2,stuetzw1,stuetzw2);
+
 enddef;

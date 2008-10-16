@@ -1,4 +1,7 @@
 
+FONT=omaenader
+FONT=ofloor
+FONT=ohund
 FONT=oblaetter
 
 all: test
@@ -17,15 +20,15 @@ all: test
 
 # \
 clean \
-${FONT}.dvi \
 ${FONT}_nfssfont.dvi \
 #
 test: \
 clean \
+${FONT}.dvi \
 #
 	latex test
-	pdflatex test
-	#xdvi test.dvi &
+	#pdflatex test
+	xdvi test.dvi &
 
 
 clean:

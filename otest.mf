@@ -1,0 +1,50 @@
+%
+% This work is licensed under the Creative Commons
+% Attribution-Noncommercial-Share Alike 3.0 Germany License. To view a copy of
+% this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/de/ or
+% send a letter to Creative Commons, 171 Second Street, Suite 300, San
+% Francisco, California, 94105, USA.
+%
+% CC by-nc-sa; 2008 by Arne Wichmann
+%
+if unknown obase: input obase fi
+
+code:=64;
+
+picture buf;
+
+def defaultpoints = 
+	pair ll,lr,ul,ur;
+	ll := origin;
+	lr := (w,0);
+	ul := (0,h);
+	ur := (w,h);
+
+	pair center; center=0.5[origin,(w,h)];
+
+	z101=(0,h/2);
+	z102=(w,h/2);
+	z103=(w/2,0);
+	z104=(w/2,h);
+	labels (range 101 thru 104);
+	labels (ll,lr,ul,ur,center);
+enddef;
+
+
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	defaultpoints;
+	blatteins(ll,right,center,ur);
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	defaultpoints;
+	blattzwei(ll,right,center,ur);
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	defaultpoints;
+	blattdrei(ll,right,center,ur);
+endchar;
+
+end

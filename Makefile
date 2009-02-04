@@ -3,6 +3,7 @@ FONT=omaenader
 FONT=ofloor
 FONT=ohund
 FONT=oblaetter
+FONT=otest
 
 all: test
 
@@ -26,9 +27,9 @@ test: \
 clean \
 ${FONT}.dvi \
 #
-	latex test
+	#latex test
 	#pdflatex test
-	xdvi test.dvi &
+	##xdvi test.dvi &
 
 
 clean:

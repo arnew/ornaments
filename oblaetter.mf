@@ -33,15 +33,15 @@ enddef;
 
 
 
-%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-%	defaultpoints;
-%	blatteins(ll,right,center,ur);
-%endchar;
-%
-%beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
-%	defaultpoints;
-%	blattzwei(ll,right,center,ur);
-%endchar;
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	defaultpoints;
+	blatteins(ll,right,center,ur);
+endchar;
+
+beginchar(incr code,(xpart bbox)*u#,(ypart bbox)*u#,0);
+	defaultpoints;
+	blattzwei(ll,right,center,ur);
+endchar;
 
 numeric wankel,blattwinkel,zweigansatz,zentrum;
 
